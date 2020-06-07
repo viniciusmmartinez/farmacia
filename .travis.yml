@@ -1,10 +1,3 @@
-deploy:
-  provider: heroku
-  api_key:
-    secure: 415c39be-63fe-4a7e-9fea-064c84c2193b
-    branch: master
-    
-    
 idioma: java 
 cache: 
 - bundler 
