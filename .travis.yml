@@ -1,17 +1,5 @@
-language: bash
-services: docker
-before_install:
-  - cd .
-script:
-  - docker-compose build
-before_deploy:
-  - echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
 deploy:
-  provider: script
-  script:
-    docker push viniciusmontouro/mysql-farmacia-apontador;
-    docker push viniciusmontouro/farmacia-apontador;
-  on:
+  provider: heroku
+  api_key:
+    secure: 415c39be-63fe-4a7e-9fea-064c84c2193b
     branch: master
-notifications:
-  email: false
