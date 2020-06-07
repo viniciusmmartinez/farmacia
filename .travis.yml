@@ -1,4 +1,4 @@
-idioma: java 
+language: bash
 deploy: 
   provider: heroku 
   api_key: 
