@@ -63,7 +63,7 @@ export class CrudHttpClientService<T extends Entity<any>> extends HttpClientServ
 	 * Consultar com paginação
 	 */
 	public consultarPaginado(filtro: FiltroPaginado): Observable<any> {
-		return this.http.post(this.url + '/consultar-paginado', filtro, this.options());
+		return this.http.get(this.url + '/search?searchTerm='+filtro.filtro.name+'&page='+filtro.pageNumber +'&size='+filtro.pageSize, this.options());
 	}
 
 }

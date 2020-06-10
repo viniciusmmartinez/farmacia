@@ -1,1 +1,91 @@
-<p>farmacia works!</p>
+<div class="form-group">
+    <div class="form-group" style="padding: 20px;">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="barra-top">
+                        <a>
+                            <img src="./assets/images/logo_apontador.png">
+                        </a>
+                    </div>            
+                </div>
+                <div class="col-sm">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-search" [(ngModel)]="search" placeholder="Pesquisa Farmácia">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button" (click)="consultarPaginado()"> 
+                                <img src="./assets/images/search.png" style="width:20px;height:20px;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm" >
+                    <button *ngIf="!isCadastro" class="btn btn-success botao-cadastro" (click)="cadastrarLocal()">
+                        <span class="fa fa-check"></span>CADASTRE UM LOCAL
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="exibicao">
+    <div class="card-body" *ngIf="!isCadastro">
+        <div class="panel-body">                
+            <div id="scrolly" class="row justify-content-md-center">
+                <div class="table-responsive col-md-3">
+                    <p-table #dt [value]="itens"   
+                        [lazy]="true" [loading]="false" 	
+                        tableStyleClass="table table-striped table-sm table-hover">
+                                    
+                        <ng-template pTemplate="body" let-item>
+                            <mat-card class="card">
+                                <mat-card-header>
+                                    <mat-card-title>{{item.name}}</mat-card-title>
+                                    <mat-card-subtitle>{{item.address}}</mat-card-subtitle>
+                                    <mat-card-subtitle>{{item.tel}}</mat-card-subtitle>
+                                </mat-card-header>
+                            </mat-card>
+                        </ng-template>
+                    </p-table>
+                    <p-paginator  [rows]="rowsPerPage" *ngIf="itens"
+                        [totalRecords]="totalRegistros"  
+                        (onPageChange)="paginar($event)"></p-paginator>                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cadastro" *ngIf="isCadastro">
+        <div class="row">
+            <div class="col-md-6">
+                <form>
+                    <div >
+                        <div class="form-group">
+                            <input required type="text" [(ngModel)]="farmacia.name" name="nome" id="nome"
+                                class="form-control" maxlength="28" placeholder="Nome do local" />
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control phone" type="number" [(ngModel)]="farmacia.tel" name="telefone" id="txt" required
+                                placeholder="Telefone" />
+                            <div id="errFirst"></div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" [(ngModel)]="farmacia.address" name="endereco" id="txt"
+                                placeholder="Endereço" required />
+                            <div id="errLast"></div>
+                        </div>
+
+                        <div class="form-group" style="text-align: right;">
+                            <button class="btn btn-success" (click)="cadastrar()">
+                                <span class="fa fa-check"></span>Cadastrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

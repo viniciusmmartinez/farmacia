@@ -18,7 +18,7 @@ export class HttpClientService {
 	static getBackendUrl(): string {
 		if (HttpClientService.urlBase.length == 0) {
 			let url: string = window.location.href;
-			let sufixo: string = '/' + HttpClientService.nomeSistema.toLowerCase() + '/api/';
+			let sufixo: string = '/' + HttpClientService.nomeSistema.toLowerCase() + '/v1/farmacia';
 
 			if (environment.backendUrlFromFrontend) {
 				let index: number = url.toUpperCase().indexOf('/' + HttpClientService.nomeSistema + '/');
@@ -46,7 +46,7 @@ export class HttpClientService {
 	constructor(
 		public url: string,
 		protected http: HttpClient,
-		private withCredentials: boolean = true
+		private withCredentials: boolean = false
 	) {
 		// Define o endpoint
 		this.url = HttpClientService.getBackendUrl() + url;

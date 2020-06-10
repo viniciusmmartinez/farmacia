@@ -5,7 +5,7 @@ import { FarmaciaComponent } from './farmacia.component';
 
 const farmaciaRoutes: Routes = [
 	{
-		path: 'farmacia',
+		path: '',
 		component: FarmaciaComponent
 	}
 ];

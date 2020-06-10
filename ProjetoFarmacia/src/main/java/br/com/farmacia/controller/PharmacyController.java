@@ -6,20 +6,24 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @author vinicius.montouro
  */
 @RestController
-@RequestMapping("v1/apontador/farmacia")
+@RequestMapping("apontador/v1/farmacia")
 @Slf4j
 @Api(value = "Endpoints to manage pharmacy")
+@CrossOrigin
 public class PharmacyController {
     @Autowired
     private PharmacyService pharmacyService;
@@ -29,6 +33,15 @@ public class PharmacyController {
     public ResponseEntity<Iterable<Pharmacy>> list(Pageable pageable) {
         return new ResponseEntity<>(pharmacyService.findPageable(pageable), HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    @ApiOperation(value = "Searche pageable", response = Pharmacy[].class)
+    public ResponseEntity<Page<List<Pharmacy>>> search(@RequestParam("searchTerm") String searchTerm,
+                                                         @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                         @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return new ResponseEntity<>(pharmacyService.search(searchTerm, page, size), HttpStatus.OK);
+    }
+
     @GetMapping("/all")
     @ApiOperation(value = "List all available pharmacys", response = Pharmacy[].class)
     public Iterable<Pharmacy> findAll() {

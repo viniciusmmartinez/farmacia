@@ -9,7 +9,7 @@ if (environment.server) {
   enableProdMode();
 }
 
-const NOME_SISTEMA: string = 'FARMACIA';
+const NOME_SISTEMA: string = 'APONTADOR';
 HttpClientService.setNomeSistema(NOME_SISTEMA);
 
 platformBrowserDynamic().bootstrapModule(AppModule)

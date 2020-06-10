@@ -8,7 +8,6 @@ const routes: Routes = [
 		loadChildren: './farmacia/farmacia.module#FarmaciaModule',
 	},
   { path: '**', pathMatch: 'full', redirectTo: '/farmacia' }
-
 ];
 
 @NgModule({

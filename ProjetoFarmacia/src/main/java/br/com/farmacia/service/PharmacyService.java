@@ -6,8 +6,14 @@ import br.com.farmacia.repository.PharmacyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author vinicius.montouro
@@ -19,10 +25,14 @@ public class PharmacyService {
     private PharmacyRepository pharmacyRepository;
 
     public Iterable<Pharmacy> findPageable(Pageable pageable) {
-        log.info("Listing all pharmacys");
         return pharmacyRepository.findAll(pageable);
     }
+    public Page<List<Pharmacy>> search(String searchTerm, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC,"name");
+        return pharmacyRepository.findByNameContaining(searchTerm.toLowerCase(),pageRequest);
+    }
 
+    @Transactional
     public Pharmacy create(Pharmacy pharmacy) {
         return pharmacyRepository.save(pharmacy);
     }
@@ -36,6 +46,7 @@ public class PharmacyService {
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
+    @Transactional
     public Pharmacy update(Pharmacy pharmacy) {
         Pharmacy entity = pharmacyRepository.findById(pharmacy.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
@@ -47,6 +58,7 @@ public class PharmacyService {
         return pharmacyRepository.save(entity);
     }
 
+    @Transactional
     public void delete(Long id) {
         Pharmacy entity = pharmacyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));

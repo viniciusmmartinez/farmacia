@@ -11,6 +11,7 @@ deploy:
   script:
     docker push viniciusmontouro/mysql-farmacia-apontador;
     docker push viniciusmontouro/farmacia-apontador;
+	docker push projetofarmacia_web ;
   on:
     branch: master
 notifications:

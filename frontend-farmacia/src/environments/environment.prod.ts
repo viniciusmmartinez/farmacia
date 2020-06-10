@@ -6,6 +6,6 @@ export const environment = {
 	envName: 'srv',
 	backendUrlFromFrontend: true,
 	backendHttps: false,
-	backendPort: 80,
+	backendPort: 8080,
 	url:'://127.0.0.1:'
 };
