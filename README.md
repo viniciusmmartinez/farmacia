@@ -77,3 +77,7 @@ URL http://localhost:8080/apontador/v1/farmacia
 ## Subir Aplicação sem ambiente
 -Executar: Para subir o contair com as imagens, basta digitar no prompt de comando dentro da pasta farmacia:
 	**`docker-compose up -d --build`**
+
+## Swagger
+-A documentação do projeto pode ser acessada atráves da 
+URL http://localhost:8080/swagger-ui.html
