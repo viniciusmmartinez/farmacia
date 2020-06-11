@@ -17,6 +17,6 @@ public interface PharmacyRepository extends PagingAndSortingRepository<Pharmacy,
 
     Pharmacy findByName(String name);
 
-    Page<List<Pharmacy>> findByNameContaining(String name, Pageable pageable);
+    Page<List<Pharmacy>> findByNameIgnoreCaseContaining(String name, Pageable pageable);
 
 }

@@ -29,7 +29,7 @@ public class PharmacyService {
     }
     public Page<List<Pharmacy>> search(String searchTerm, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC,"name");
-        return pharmacyRepository.findByNameContaining(searchTerm.toLowerCase(),pageRequest);
+        return pharmacyRepository.findByNameIgnoreCaseContaining(searchTerm.toLowerCase(),pageRequest);
     }
 
     @Transactional
